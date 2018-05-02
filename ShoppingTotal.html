@@ -89,8 +89,8 @@
         </div>
     </div>
     <ul >
-        <li class="totalNum">数量合计：<span>20</span></li>
-        <li class="totalPri">金额合计：<span>20</span></li>
+        <li>数量合计：<span class="totalNum">20</span></li>
+        <li>金额合计：<span class="totalPri">20</span></li>
     </ul>
 
     <!--<div>-->
@@ -108,8 +108,8 @@
         num = document.getElementsByClassName("number"),
         price = document.getElementsByClassName("price"),
         rowTotal = document.getElementsByClassName("rowTol"),
-        totalNum = ,
-        totalPri;
+        totalNum = document.getElementsByClassName("totalNum")[0],
+        totalPri = document.getElementsByClassName("totalPri")[0];
     for (var i = 0; i < minus.length; i++) {
         minus[i].order = i;
         plus[i].order = i;
@@ -129,6 +129,8 @@
                 num.value = 0;
             console.log(nowNum);
         };
+        totalNum.innerHTML += num[i].value;
+        totalPri.innerHTML += price[i].value;
     };
 
 
