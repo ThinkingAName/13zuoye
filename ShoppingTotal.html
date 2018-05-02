@@ -1,0 +1,135 @@
+<!doctype html>               <!--申明html文档-->
+<html>
+<head>
+    <meta charset="utf-8">      <!--字符编码为国际编码-->
+    <meta name="Author" content="40期风屿JS——不懂就问">    <!--网页创建者-->
+    <meta name="Keywords" content="作业，练习题">         <!--供搜索引擎搜索匹配的关键-->
+    <meta name="description" content="课后练习题作业，熟悉课堂学习操作">  <!--在搜索有结果页面显示的网页描述-->
+    <title>第2次课后作业</title>   <!--网页标题-->
+    <!--
+          <link rel="stylesheet" type="text/css" href="css/common.css">
+          <link rel="stylesheet" type="text/css" href="css/index.css">
+          <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+          <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+          -->
+    <style>
+        body, p, ul, dl, dd, ol, h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+
+        ul, ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0;
+        }
+
+        em, i {
+            font-style: normal; /*设置字体样式：正常显示（就是不倾斜）*/
+        }
+
+        strong, b {
+            font-weight: normal; /*设置字体加粗：正常显示（就是不加粗）*/
+        }
+
+        a {
+            text-decoration: none; /*去掉下划线*/
+        }
+        .clearfix:after{
+            display: block;
+            content:"";
+            clear:both;
+        }
+        .minus,.number,.plus{
+            height:30px;
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .minus,.plus {
+            background-color: aliceblue;
+        }
+        .price,.controlNum,.rowTol{
+            display: inline-block;
+            margin:0 50px;
+        }
+        span{
+            font-size: 20px;
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style = "background-color: brown">
+            <input class="price" type="text" value="20">
+            <div class="controlNum ">
+                <button class="minus">-</button>
+                <input class="number" type="text" value="1">
+                <button class="plus">+</button>
+            </div>
+            <input class="rowTol" type="text" >
+        </div>
+
+        <div style = "background-color: brown">
+            <input class="price" type="text" value="20">
+            <div class="controlNum ">
+                <button class="minus">-</button>
+                <input class="number" type="text" value="1">
+                <button class="plus">+</button>
+            </div>
+            <input class="rowTol" type="text" >
+        </div>
+    </div>
+    <ul >
+        <li class="totalNum">数量合计：<span>20</span></li>
+        <li class="totalPri">金额合计：<span>20</span></li>
+    </ul>
+
+    <!--<div>-->
+        <!--<input class="price" type="text" value="20">-->
+        <!--<div>-->
+            <!--<button class="minus">-</button>-->
+            <!--<input class="number" type="text" value="1">-->
+            <!--<button class="plus">+</button>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<script>
+    var minus = document.getElementsByClassName("minus"),
+        plus = document.getElementsByClassName("plus"),
+        num = document.getElementsByClassName("number"),
+        price = document.getElementsByClassName("price"),
+        totalNum,
+        totalPri;
+    for (var i = 0; i < minus.length; i++) {
+        minus[i].order = i;
+        plus[i].order = i;
+        plus[i].onclick = function() {
+            var ord = this.order.valueOf(),
+                nowNum = num[ord].value;
+                num[ord].value = ++nowNum;
+                console.log(nowNum);
+        };
+        minus[i].onclick = function (){
+            var ord = this.order.valueOf(),
+                nowNum = num[ord].value;
+                if(nowNum>=1){
+                num[ord].value = --nowNum;
+            }else
+                num.value = 0;
+            console.log(nowNum);
+        };
+    };
+
+
+</script>
+</body>
+</html>
