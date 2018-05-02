@@ -69,7 +69,7 @@
 <body>
     <div>
         <div style = "background-color: brown">
-            <input class="price" type="text" value="20">
+            <input class="price" type="text" value="50">
             <div class="controlNum ">
                 <button class="minus">-</button>
                 <input class="number" type="text" value="1">
@@ -79,7 +79,7 @@
         </div>
 
         <div style = "background-color: brown">
-            <input class="price" type="text" value="20">
+            <input class="price" type="text" value="21">
             <div class="controlNum ">
                 <button class="minus">-</button>
                 <input class="number" type="text" value="1">
@@ -107,11 +107,13 @@
         plus = document.getElementsByClassName("plus"),
         num = document.getElementsByClassName("number"),
         price = document.getElementsByClassName("price"),
-        totalNum,
+        rowTotal = document.getElementsByClassName("rowTol"),
+        totalNum = ,
         totalPri;
     for (var i = 0; i < minus.length; i++) {
         minus[i].order = i;
         plus[i].order = i;
+        rowTotal[i].value = price[i].value * num[i].value;
         plus[i].onclick = function() {
             var ord = this.order.valueOf(),
                 nowNum = num[ord].value;
