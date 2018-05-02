@@ -5,7 +5,7 @@
     <meta name="Author" content="40期风屿JS——不懂就问">    <!--网页创建者-->
     <meta name="Keywords" content="作业，练习题">         <!--供搜索引擎搜索匹配的关键-->
     <meta name="description" content="课后练习题作业，熟悉课堂学习操作">  <!--在搜索有结果页面显示的网页描述-->
-    <title>第2次课后作业</title>   <!--网页标题-->
+    <title>第13次课后作业--购物车</title>   <!--网页标题-->
     <!--
           <link rel="stylesheet" type="text/css" href="css/common.css">
           <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -41,11 +41,7 @@
         a {
             text-decoration: none; /*去掉下划线*/
         }
-        .clearfix:after{
-            display: block;
-            content:"";
-            clear:both;
-        }
+
         .minus,.number,.plus{
             height:30px;
             width: 50px;
@@ -59,48 +55,45 @@
         .price,.controlNum,.rowTol{
             display: inline-block;
             margin:0 50px;
+            text-align: center;
         }
         span{
             font-size: 20px;
             color: coral;
+        }
+        input {
+            disabled: disabled;
         }
     </style>
 </head>
 <body>
     <div>
         <div style = "background-color: brown">
-            <input class="price" type="text" value="50">
+            <input class="price" type="text" value="50" disabled>
             <div class="controlNum ">
                 <button class="minus">-</button>
-                <input class="number" type="text" value="1">
+                <input class="number" type="text" value="2" disabled>
                 <button class="plus">+</button>
             </div>
             <input class="rowTol" type="text" >
         </div>
 
         <div style = "background-color: brown">
-            <input class="price" type="text" value="21">
+            <input class="price" type="text" value="21.5">
             <div class="controlNum ">
                 <button class="minus">-</button>
-                <input class="number" type="text" value="1">
+                <input class="number" type="text" value="2">
                 <button class="plus">+</button>
             </div>
             <input class="rowTol" type="text" >
         </div>
     </div>
     <ul >
-        <li>数量合计：<span class="totalNum">20</span></li>
-        <li>金额合计：<span class="totalPri">20</span></li>
+        <li>数量合计：<span class="totalNum"></span></li>
+        <li>金额合计：<span class="totalPri"></span></li>
     </ul>
 
-    <!--<div>-->
-        <!--<input class="price" type="text" value="20">-->
-        <!--<div>-->
-            <!--<button class="minus">-</button>-->
-            <!--<input class="number" type="text" value="1">-->
-            <!--<button class="plus">+</button>-->
-        <!--</div>-->
-    <!--</div>-->
+
 
 <script>
     var minus = document.getElementsByClassName("minus"),
@@ -109,29 +102,58 @@
         price = document.getElementsByClassName("price"),
         rowTotal = document.getElementsByClassName("rowTol"),
         totalNum = document.getElementsByClassName("totalNum")[0],
-        totalPri = document.getElementsByClassName("totalPri")[0];
+        totalPri = document.getElementsByClassName("totalPri")[0],
+        totalMony,
+        allNum;
     for (var i = 0; i < minus.length; i++) {
+        // 保存点击事件对应的操作对象位置；
         minus[i].order = i;
         plus[i].order = i;
-        rowTotal[i].value = price[i].value * num[i].value;
+        // 加数量 事件
         plus[i].onclick = function() {
             var ord = this.order.valueOf(),
                 nowNum = num[ord].value;
                 num[ord].value = ++nowNum;
-                console.log(nowNum);
+                rowTotal[ord].value = (price[ord].value * num[ord].value).toFixed(2);
+                numAndMonySum();
+               // console.log(nowNum);
+               // console.log(totalMony);
         };
+        // 减数量 事件
         minus[i].onclick = function (){
             var ord = this.order.valueOf(),
                 nowNum = num[ord].value;
+            // 判断若减为 1 则在点击则最小为0；
                 if(nowNum>=1){
                 num[ord].value = --nowNum;
             }else
                 num.value = 0;
-            console.log(nowNum);
+                rowTotal[ord].value = (price[ord].value * num[ord].value).toFixed(2);
+                numAndMonySum();
+            //console.log(nowNum);
         };
-        totalNum.innerHTML += num[i].value;
-        totalPri.innerHTML += price[i].value;
+
+        // 获取默认（默认数量为1个）各项 小计金额。
+        rowTotal[i].value = (price[i].value * num[i].value).toFixed(2);
+
     };
+
+        // 获取页面默认数据的合计；
+            numAndMonySum();
+
+        // 根据数量修改数量合计、金额合计；
+        function numAndMonySum () {
+                allNum = 0;
+                totalMony = 0;
+             for(var i=0;i<minus.length;i++){
+                 // 计算总数量
+                 allNum = allNum + parseInt(num[i].value);
+                 // 计算总金额
+                 totalMony = totalMony + parseFloat( rowTotal[i].value);
+             };
+             totalNum.innerHTML = allNum.toFixed(2);
+             totalPri.innerHTML = totalMony.toFixed(2);
+        }
 
 
 </script>
